@@ -6,6 +6,13 @@ gretty {
     servletContainer = 'jetty9'
 }
 
+/*
+task copyDist(type: Copy) {
+    dependsOn "buildProduct"
+    from 'build/output/${project.name}'
+    into '/opt/myapp'
+}*/
+
 repositories {
     mavenCentral()
     jcenter()

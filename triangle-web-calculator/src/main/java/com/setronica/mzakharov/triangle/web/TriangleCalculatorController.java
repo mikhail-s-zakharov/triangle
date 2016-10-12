@@ -7,11 +7,9 @@ import com.setronica.mzakharov.trianglechallenge.ShapeDefinitionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,6 +44,16 @@ public class TriangleCalculatorController {
         ModelAndView mv = new ModelAndView("index");
         mv.addObject("triangle", null);
         mv.addObject("exception", e);
+        return mv;
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ModelAndView handleRequestError(HttpServletRequest request, Exception e){
+        logger.error("Request " + request.getMethod() + " to " + request.getRequestURL() + " caused 400/Bad Request", e);
+        ModelAndView mv = new ModelAndView("index");
+        mv.addObject("triangle", null);
+        mv.addObject("exception", new RuntimeException("Request contained malformed or insufficient input", e));
         return mv;
     }
 }
