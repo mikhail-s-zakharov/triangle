@@ -2,7 +2,8 @@ apply plugin: 'war'
 apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
 apply plugin: 'docker'
 
-def distZip = project.name + '-' + project.version + '-bundled.zip'
+def distPackageName = project.name + '-' + project.version + '-bundled.tgz'
+def productDirectory = 'build/output/' + project.name;
 
 buildscript {
     repositories {
@@ -29,21 +30,22 @@ docker {
     maintainer 'Mikhail S. Zakharov "mzakharov@setronica.com"'
 }
 
-
+def distPath = new File(projectDir.parentFile, distPackageName).absolutePath
+def containerWorkDir = '/opt/' + project.name
 task dockerImage(type: Docker) {
-    dependsOn 'packageApp'
+    dependsOn 'buildProduct'
     exposePort 8086
-    addFile distZip, '/opt/' + project.name
-    runCommand 'apt-get -y install unzip'
-    runCommand 'unzip /opt/' + project.name + '/' + distZip + ' -d /opt/' + project.name
-    entryPoint = ['/opt/' + project.name + '/start.sh']
+    runCommand 'mkdir ' + containerWorkDir
+    addFile productDirectory, containerWorkDir
+    entryPoint = [containerWorkDir + '/start.sh']
 }
 
-task packageApp(type:Zip){
+task packageApp(type:Tar){
     dependsOn 'buildProduct'
-    from ('build/output/' + project.name)
+    from (productDirectory)
     destinationDir projectDir.parentFile
-    archiveName project.name + '-' + project.version + '-bundled.zip'
+    archiveName distPackageName
+    compression = Compression.GZIP
 }
 
 repositories {
