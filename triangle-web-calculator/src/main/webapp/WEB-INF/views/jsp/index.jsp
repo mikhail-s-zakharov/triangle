@@ -15,6 +15,7 @@
     <!-- Bootstrap Material Design -->
     <link rel="stylesheet" type="text/css" href="./static/bootstrap-material/css/bootstrap-material-design.css">
     <link rel="stylesheet" type="text/css" href="./static/bootstrap-material/css/ripples.min.css">
+    <link rel="stylesheet" type="text/css" href="./static/index.css">
     <script language="javascript" type="text/javascript" src="./static/bootstrap-material/js/material.js">
     </script>
     <script language="javascript" type="text/javascript" src="./static/bootstrap-material/js/ripples.js">
@@ -27,8 +28,8 @@
     </script>
 </head>
 <body>
-    <div class="container">
-        <div class="jumbotron">
+    <div class="container page-content">
+        <div class="jumbotron text-center">
             Triangle calculation
         </div>
         <div class="row">
