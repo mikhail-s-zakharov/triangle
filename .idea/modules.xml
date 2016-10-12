@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/triangle.iml" filepath="$PROJECT_DIR$/.idea/modules/triangle.iml" />
-      <module fileurl="file://$PROJECT_DIR$/triangle-web-calculator/triangle-web-calculator.iml" filepath="$PROJECT_DIR$/triangle-web-calculator/triangle-web-calculator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/triangle-web-calculator/triangle-web-calculator.iml" filepath="$PROJECT_DIR$/.idea/modules/triangle-web-calculator/triangle-web-calculator.iml" group="triangle-web-calculator" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/triangle-web-calculator/triangle-web-calculator_main.iml" filepath="$PROJECT_DIR$/.idea/modules/triangle-web-calculator/triangle-web-calculator_main.iml" group="triangle-web-calculator" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/triangle-web-calculator/triangle-web-calculator_test.iml" filepath="$PROJECT_DIR$/.idea/modules/triangle-web-calculator/triangle-web-calculator_test.iml" group="triangle-web-calculator" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/triangle_main.iml" filepath="$PROJECT_DIR$/.idea/modules/triangle_main.iml" group="triangle" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/triangle_test.iml" filepath="$PROJECT_DIR$/.idea/modules/triangle_test.iml" group="triangle" />
     </modules>

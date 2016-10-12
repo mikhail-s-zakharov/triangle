@@ -1,2 +1,3 @@
 rootProject.name = 'triangle'
+include 'triangle-web-calculator'
 

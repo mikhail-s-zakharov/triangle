@@ -1,0 +1,16 @@
+apply plugin: 'war'
+apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+gretty {
+    contextPath = "triangle"
+    httpPort = 8086
+    servletContainer = 'jetty9'
+}
+
+dependencies {
+    //classpath 'org.akhikhl.gretty:gretty:+'
+    compile rootProject
+    compile 'ch.qos.logback:logback-classic:1.1.3'
+    compile 'org.springframework:spring-webmvc:4.1.6.RELEASE'
+    compile 'javax.servlet:jstl:1.2'
+    compile 'javax.servlet:javax.servlet-api:3.0.1'
+}

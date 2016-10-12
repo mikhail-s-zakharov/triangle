@@ -19,8 +19,10 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="triangle_main" target="1.5" />
-      <module name="triangle_test" target="1.5" />
+      <module name="triangle-web-calculator_main" target="1.8" />
+      <module name="triangle-web-calculator_test" target="1.8" />
+      <module name="triangle_main" target="1.8" />
+      <module name="triangle_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
