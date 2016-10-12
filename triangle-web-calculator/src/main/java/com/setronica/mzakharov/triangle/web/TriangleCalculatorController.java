@@ -4,6 +4,7 @@ import com.setronica.mzakharov.triangle.model.TriangleConstructionForm;
 import com.setronica.mzakharov.triangle.service.TriangleCalculatorService;
 
 import com.setronica.mzakharov.trianglechallenge.ShapeDefinitionException;
+import com.setronica.mzakharov.trianglechallenge.Triangle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,26 +35,31 @@ public class TriangleCalculatorController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ModelAndView calculate(@ModelAttribute TriangleConstructionForm triangleConstructionForm){
         ModelAndView mv = new ModelAndView("index");
-        mv.addObject("triangle", triangleCalculatorService.buildTriangle(triangleConstructionForm.getSideA(), triangleConstructionForm.getSideB(), triangleConstructionForm.getSideC()));
-        return mv;
+        return createModelAndView(
+                triangleCalculatorService.buildTriangle(
+                        triangleConstructionForm.getSideA(),
+                        triangleConstructionForm.getSideB(),
+                        triangleConstructionForm.getSideC()
+                ), null);
     }
 
     @ExceptionHandler(ShapeDefinitionException.class)
     public ModelAndView handleCalculationError(HttpServletRequest request, Exception e){
         logger.error("Request " + request.getMethod() + " to " + request.getRequestURL() + " raised exception", e);
-        ModelAndView mv = new ModelAndView("index");
-        mv.addObject("triangle", null);
-        mv.addObject("exception", e);
-        return mv;
+        return createModelAndView(null, e);
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ModelAndView handleRequestError(HttpServletRequest request, Exception e){
         logger.error("Request " + request.getMethod() + " to " + request.getRequestURL() + " caused 400/Bad Request", e);
+        return createModelAndView(null, new RuntimeException("Request contained malformed or insufficient input", e));
+    }
+
+    private ModelAndView createModelAndView(Triangle result, Exception error){
         ModelAndView mv = new ModelAndView("index");
-        mv.addObject("triangle", null);
-        mv.addObject("exception", new RuntimeException("Request contained malformed or insufficient input", e));
+        mv.addObject("triangle", result);
+        mv.addObject("exception", error);
         return mv;
     }
 }
