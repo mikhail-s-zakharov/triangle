@@ -2,8 +2,9 @@ Web-based calculator for solving triangles
 Author: Mikhail S. Zakharov (mzakharov@setronica.com)
 
 1. Introduction
-This a demo project built in order to design and implement the task of calculating arbitrary triangle be given sidelengths.
+This is a demo project built in order to design and implement the task of calculating arbitrary triangle by given sidelengths.
 After build and launch, software become accessible as web page suitable for most modern desktop and mobile browsers.
+Note: Author assumes that you experienced enough for cloning, building and running this code, so you must be familiar with JDK, Git, console and Docker.
 
 2. Prerequisites
 - Java 8 Development Kit (Oracle JDK is better)
