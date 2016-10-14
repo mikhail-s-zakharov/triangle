@@ -4,6 +4,9 @@ apply plugin: 'docker'
 
 def distPackageName = project.name + '-' + project.version + '-bundled.tgz'
 def productDirectory = 'build/output/' + project.name;
+def distPath = new File(projectDir.parentFile, distPackageName).absolutePath
+def containerWorkDir = '/opt/' + project.name
+def dockerHubAccount = 'cyberspacelabs'
 
 buildscript {
     repositories {
@@ -30,10 +33,10 @@ docker {
     maintainer 'Mikhail S. Zakharov "mzakharov@setronica.com"'
 }
 
-def distPath = new File(projectDir.parentFile, distPackageName).absolutePath
-def containerWorkDir = '/opt/' + project.name
+
 task dockerImage(type: Docker) {
     dependsOn 'buildProduct'
+    tag = dockerHubAccount + '/' + project.name
     exposePort 8086
     runCommand 'mkdir ' + containerWorkDir
     addFile productDirectory, containerWorkDir

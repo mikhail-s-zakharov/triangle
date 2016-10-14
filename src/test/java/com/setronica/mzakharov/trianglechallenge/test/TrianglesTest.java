@@ -12,13 +12,12 @@ public class TrianglesTest {
     @Test
     public void sidesFormTriangle(){
         Triangle t = new Triangle(5.0d, 8.0d, 10.0d);
-        Assert.assertEquals(true, t.canBeBuilt());
+        Assert.assertNotNull(t);
     }
 
-    @Test
+    @Test(expected = ShapeDefinitionException.class)
     public void sidesNotFormTriangle(){
         Triangle t = new Triangle(5.5d, 8.1d, 2.04d);
-        Assert.assertEquals(false, t.canBeBuilt());
     }
 
     @Test

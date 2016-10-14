@@ -4,7 +4,7 @@ package com.setronica.mzakharov.trianglechallenge;
  * Created by mzakharov on 11.10.16.
  * Represents computations with triangle shape
  */
-public class Triangle extends Shape {
+public final class Triangle {
     /**
      * Summ of all angles, 180 degrees respectively
      */
@@ -34,17 +34,32 @@ public class Triangle extends Shape {
      * @param c - side C length
      */
     public Triangle(double a, double b, double c) {
+        if (a <= 0){
+            throw new ShapeDefinitionException("A side must have positive value");
+        }
+
+        if (b <= 0){
+            throw new ShapeDefinitionException("B side must have positive value");
+        }
+
+        if (c <= 0){
+            throw new ShapeDefinitionException("C side must have positive value");
+        }
+
+        if (a + b <= c){
+            throw new ShapeDefinitionException("C side doesn't satisfied to triangle inequality");
+        }
+
+        if (a + c <= b){
+            throw new ShapeDefinitionException("B side doesn't satisfied to triangle inequality");
+        }
+
+        if (c + b <= a){
+            throw new ShapeDefinitionException("A side doesn't satisfied to triangle inequality");
+        }
         this.a = a;
         this.b = b;
         this.c = c;
-    }
-
-    /**
-     * Check compliance to positive side lengths and to "triangle inequality"
-     * @return true if triangle can be formed from defined side lengths
-     */
-    public boolean canBeBuilt() {
-        return a > 0 && b > 0 && c > 0 && a + b > c && a + c > b && b + c > a;
     }
 
     /**
@@ -52,7 +67,6 @@ public class Triangle extends Shape {
      * @return @{@link KIND} member, relevant to
      */
     public KIND getTriangleKind(){
-        checkCanBeBuilt();
         if (a == b && b == c) {
             return KIND.EQUILATERAL;
         }
@@ -62,14 +76,11 @@ public class Triangle extends Shape {
         return KIND.SCALENE;
     }
 
-    @Override
     public int getSidesCount() {
         return 3;
     }
 
-    @Override
     public double getPerimeter() {
-        checkCanBeBuilt();
         return a + b + c;
     }
 
@@ -86,24 +97,15 @@ public class Triangle extends Shape {
     }
 
     public double getAlpha(){
-        checkCanBeBuilt();
         return getOppositeAngleFor(a, b, c);
     }
 
     public double getBeta(){
-        checkCanBeBuilt();
         return getOppositeAngleFor(b, a, c);
     }
 
     public double getGamma(){
-        checkCanBeBuilt();
         return getOppositeAngleFor(c, b, a);
-    }
-
-    private void checkCanBeBuilt(){
-        if (!canBeBuilt()){
-            throw new ShapeDefinitionException("Triangle can't be formed out of such sides: " + a + ";" + b + ";" + c);
-        }
     }
 
     private static double getOppositeAngleFor(double oppositeSide, double adjacentSideA, double adjacentSideB){

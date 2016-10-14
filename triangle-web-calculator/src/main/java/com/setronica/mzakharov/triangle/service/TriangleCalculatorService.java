@@ -14,9 +14,6 @@ public class TriangleCalculatorService {
     * just a dumb factory method
     * */
     public Triangle buildTriangle(double a, double b, double c){
-        Triangle result = new Triangle(a, b, c);
-        // validate result
-        result.getPerimeter();
-        return result;
+        return new Triangle(a, b, c);
     }
 }
